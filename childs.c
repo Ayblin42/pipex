@@ -6,7 +6,7 @@
 /*   By: ayblin <ayblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 03:15:20 by rigel             #+#    #+#             */
-/*   Updated: 2022/02/17 21:44:45 by ayblin           ###   ########.fr       */
+/*   Updated: 2022/02/17 23:04:10 by ayblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	child_process2(t_pipex pipex, char **argv, char **envp)
 	dup2(pipex.tube[0], STDIN_FILENO);
 	dup2(pipex.fdout, STDOUT_FILENO);
 	close(pipex.tube[1]);
+	close(pipex.tube[0]);
 	close(pipex.fdout);
 	while (pipex.mypaths[i])
 	{
