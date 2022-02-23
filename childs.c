@@ -30,18 +30,20 @@ void	child_process1(t_pipex pipex, char **argv, char **envp)
 	char	**mycmdargs;
 
 	mycmdargs = ft_split(argv[2], ' ');
-	printf("pipi");
 	i = 0;
 	dup2(pipex.fdin, STDIN_FILENO);
 	dup2(pipex.tube[1], STDOUT_FILENO);
 	close(pipex.tube[0]);
-	close(pipex.fdin);
 	while (pipex.mypaths[i])
 	{
 		cmd = get_cmd(pipex.mypaths[i], mycmdargs[0]);
 		execve(cmd, mycmdargs, envp);
 		i++;
 	}
+	if (!cmd)
+		write(1,"caca",4);
+	else 
+		write(1,"pipi",4);
 }
 
 void	child_process2(t_pipex pipex, char **argv, char **envp)
@@ -56,12 +58,14 @@ void	child_process2(t_pipex pipex, char **argv, char **envp)
 	dup2(pipex.tube[0], STDIN_FILENO);
 	dup2(pipex.fdout, STDOUT_FILENO);
 	close(pipex.tube[1]);
-	close(pipex.tube[0]);
-	close(pipex.fdout);
 	while (pipex.mypaths[i])
 	{
 		cmd = get_cmd(pipex.mypaths[i], mycmdargs[0]);
 		execve(cmd, mycmdargs, envp);
 		i++;
 	}
+	if (!cmd)
+		write(1,"caca",4);
+	else 
+		write(1,"pipi",4);
 }

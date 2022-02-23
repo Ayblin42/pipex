@@ -17,17 +17,32 @@ void	close_pipes(t_pipex *pipex)
 	close(pipex->tube[0]);
 	close(pipex->tube[1]);
 }
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int			ft_msg(char *str)
+{
+	write(1,str,ft_strlen(str));
+	return (1);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
 	if (argc != 5)
-		return (1);
+		return (ft_msg("invalid number of arguments"));
 	pipex.fdin = open(argv[1], O_RDONLY);
 	pipex.fdout = open(argv[4], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (pipex.fdin < 0 || pipex.fdout < 0)
-		return (1);
+		return (ft_msg("failed to open infile or outfile"));
 	pipex.path_from_envp = find_path(envp);
 	pipex.mypaths = ft_split(pipex.path_from_envp, ':');
 	pipe(pipex.tube);
@@ -44,7 +59,6 @@ int	main(int argc, char **argv, char **envp)
 	close_pipes(&pipex);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
-	while (1);
 }
 
 char	*find_path(char **envp)

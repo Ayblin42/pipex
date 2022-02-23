@@ -44,5 +44,7 @@ char		*get_cmd(char *path, char *cmd);
 void		child_process1(t_pipex pipex, char **argv, char **envp);
 void		child_process2(t_pipex pipex, char **argv, char **envp);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+int			ft_msg(char *str);
+int			ft_strlen(char *str);
 
 #endif
