@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayblin <ayblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ayblin <ayblin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 01:39:50 by rigel             #+#    #+#             */
-/*   Updated: 2022/02/17 23:20:20 by ayblin           ###   ########.fr       */
+/*   Updated: 2022/02/23 14:44:26 by ayblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	close_pipes(t_pipex *pipex)
 	close(pipex->tube[0]);
 	close(pipex->tube[1]);
 }
+
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -27,9 +28,9 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int			ft_msg(char *str)
+int	ft_msg(char *str)
 {
-	write(1,str,ft_strlen(str));
+	write(1, str, ft_strlen(str));
 	return (1);
 }
 
@@ -59,6 +60,7 @@ int	main(int argc, char **argv, char **envp)
 	close_pipes(&pipex);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
+	parent_free(&pipex);
 }
 
 char	*find_path(char **envp)

@@ -4,7 +4,8 @@ SRC = pipex.c \
 	childs.c \
 	ft_split.c \
 	ft_strjoin.c \
-	ft_strncmp.c 
+	ft_strncmp.c \
+	free.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -15,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(SRC) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 	
 clean:
 	rm -f $(OBJ) $(BONUS_OBJS)

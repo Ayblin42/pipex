@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayblin <ayblin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:29:29 by ayblin            #+#    #+#             */
-/*   Updated: 2022/02/23 15:12:10 by ayblin           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:49:44 by ayblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -37,17 +37,5 @@ typedef struct s_pipex
 	char	**mycmdargs;
 }t_pipex;
 
-char		*find_path(char **envp);
-int			pipex(t_pipex pipex, char **argv, char **envp);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-char		**ft_split(char const *s, char c);
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*get_cmd(char *path, char *cmd);
-void		child_process1(t_pipex pipex, char **argv, char **envp);
-void		child_process2(t_pipex pipex, char **argv, char **envp);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			ft_msg(char *str);
-int			ft_strlen(char *str);
-void		parent_free(t_pipex *pipex);
-void		child_free(t_pipex *pipex);
+
 #endif
