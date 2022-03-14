@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayblin <ayblin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:29:29 by ayblin            #+#    #+#             */
-/*   Updated: 2022/02/23 18:08:01 by ayblin           ###   ########.fr       */
+/*   Updated: 2022/02/26 14:45:41 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PIPEX_H
 
 # include <stdlib.h>
-# include <stdio.h>gi
+# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -25,6 +25,7 @@
 
 typedef struct s_pipex
 {
+	int		cmd_nbs;
 	int		pid1;
 	int		pid2;
 	int		tube[2];

@@ -6,11 +6,11 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:22:29 by ayblin            #+#    #+#             */
-/*   Updated: 2022/02/25 22:13:26 by rigel            ###   ########.fr       */
+/*   Updated: 2022/02/26 16:01:39 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	child_free(t_pipex *pipex)
 {

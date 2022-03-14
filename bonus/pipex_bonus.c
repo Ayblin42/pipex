@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayblin <ayblin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ayblin <ayblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:10:06 by ayblin            #+#    #+#             */
-/*   Updated: 2022/02/23 17:58:41 by ayblin           ###   ########.fr       */
+/*   Updated: 2022/03/12 22:47:41 by ayblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,44 @@ char	*find_path(char **envp)
 	return (*envp + 5);
 }
 
+int	ft_msg(char *str)
+{
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
+	return (1);
+}
+
+static int	args_count(char *arg, t_pipex *pipex)
+{
+	if (arg && !ft_strncmp("here_doc", arg, 9))
+	{
+		pipex->here_doc = 1;
+		return (6);
+	}
+	else
+	{
+		pipex->here_doc = 0;
+		return (5);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
-	pipex.fdin = open(argv[1], O_RDONLY);
-	pipex.fdout = open(argv[4], O_TRUNC | O_CREAT | O_RDWR, 0000644);
-	if (pipex.fdin < 0 || pipex.fdout < 0)
-		return (ft_msg("failed to open infile or outfile"));
+	if (argc < args_count(argv[1], &pipex))
+		return (ft_msg("invalid number of arguments."));
+	pipex.idx = -1;
+	pipex.cmd_nbs = argc - 3 - pipex.here_doc;
+	pipex.pipe_nbs = (pipex.cmd_nbs - 1) * 2;
+	get_infile(argv, &pipex);
+	get_outfile(argv[argc - 1], &pipex);
 	pipex.path_from_envp = find_path(envp);
 	pipex.mypaths = ft_split(pipex.path_from_envp, ':');
-	pipe(pipex.tube);
-	while()
-	close_pipes(&pipex);
-	waitpid(pipex.pid1, NULL, 0);
-	waitpid(pipex.pid2, NULL, 0);
+	while (++(pipex.idx) < pipex.cmd_nbs)
+	{
+		child(pipex, argv, envp);
+	}
+	waitpid(-1, NULL, 0);
 	parent_free(&pipex);
 }

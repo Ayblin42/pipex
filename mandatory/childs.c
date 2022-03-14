@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayblin <ayblin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 03:15:20 by rigel             #+#    #+#             */
-/*   Updated: 2022/02/23 15:27:33 by ayblin           ###   ########.fr       */
+/*   Updated: 2022/02/26 16:34:56 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ void	child_process2(t_pipex pipex, char **argv, char **envp)
 		i++;
 	}
 	child_free(&pipex);
-	dup2(STDOUT_FILENO, pipex.fdout);
 	write(2, "command not found\n", 18);
 }

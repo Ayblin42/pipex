@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 14:22:29 by ayblin            #+#    #+#             */
-/*   Updated: 2022/02/25 22:13:26 by rigel            ###   ########.fr       */
+/*   Created: 2021/11/23 11:34:12 by ayblin            #+#    #+#             */
+/*   Updated: 2022/02/26 16:04:04 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-void	child_free(t_pipex *pipex)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	i;
-
-	i = 0;
-	while (pipex->mycmdargs[i])
+	while ((*s1 || *s2) && (n > 0))
 	{
-		free(pipex->mycmdargs[i]);
-		i++;
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+		n--;
 	}
-	free(pipex->mycmdargs);
-	free(pipex->cmd);
-}
-
-void	parent_free(t_pipex *pipex)
-{
-	int	i;
-
-	i = 0;
-	close(pipex->fdin);
-	close(pipex->fdout);
-	while (pipex->mypaths[i])
-	{
-		free(pipex->mypaths[i]);
-		i++;
-	}
-	free(pipex->mypaths);
+	return (0);
 }
